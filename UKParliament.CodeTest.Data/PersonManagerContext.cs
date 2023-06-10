@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace UKParliament.CodeTest.Data
 {
@@ -10,6 +8,18 @@ namespace UKParliament.CodeTest.Data
         {
         }
 
-        public DbSet<Person> People { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MP>().HasOne(v => v.Address);
+            modelBuilder.Entity<MP>().HasOne(v => v.Affiliation);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public DbSet<MP> MPs { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Affiliation> Affiliations { get; set; }
+
+
     }
 }

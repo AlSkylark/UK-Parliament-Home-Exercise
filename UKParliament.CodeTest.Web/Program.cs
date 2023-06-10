@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using UKParliament.CodeTest.Data;
 using UKParliament.CodeTest.Services;
+using UKParliament.CodeTest.Web.Data;
 
 namespace UKParliament.CodeTest.Web
 {
@@ -16,7 +17,8 @@ namespace UKParliament.CodeTest.Web
 
             builder.Services.AddDbContext<PersonManagerContext>(op => op.UseInMemoryDatabase("PersonManager"));
 
-            builder.Services.AddScoped<IPersonService, PersonService>();
+            builder.Services.AddScoped<IPersonService<MP>, MPService>();
+            //builder.Services.AddScoped<IPersonService<Person>, PersonService>();
 
             var app = builder.Build();
 
@@ -27,6 +29,7 @@ namespace UKParliament.CodeTest.Web
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -36,7 +39,10 @@ namespace UKParliament.CodeTest.Web
 
             app.MapFallbackToFile("index.html");
 
+            DatabaseSeeder.Seed(app);
+
             app.Run();
         }
+
     }
 }

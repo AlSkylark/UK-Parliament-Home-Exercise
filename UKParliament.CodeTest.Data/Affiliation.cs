@@ -2,14 +2,11 @@
 
 namespace UKParliament.CodeTest.Data
 {
-    public class Person
+    public class Affiliation
     {
         [Key]
-        public int PersonId { get; set; }
-
+        public int AffiliationId { get; set; }
         public string Name { get; set; }
-
-        public DateTime DOB { get; set; }
 
     }
 }

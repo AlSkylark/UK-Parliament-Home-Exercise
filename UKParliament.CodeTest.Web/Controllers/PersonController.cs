@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UKParliament.CodeTest.Data;
+using UKParliament.CodeTest.Services;
 using UKParliament.CodeTest.Web.ViewModels;
 
 namespace UKParliament.CodeTest.Web.Controllers
@@ -7,11 +9,13 @@ namespace UKParliament.CodeTest.Web.Controllers
     [Route("api/[controller]")]
     public class PersonController : ControllerBase
     {
+        private readonly IPersonService<Person> _service;
         private readonly ILogger<PersonController> _logger;
 
-        public PersonController(ILogger<PersonController> logger)
+        public PersonController(ILogger<PersonController> logger, IPersonService<Person> service)
         {
             _logger = logger;
+            _service = service;
         }
 
         [Route("{id:int}")]
@@ -20,5 +24,6 @@ namespace UKParliament.CodeTest.Web.Controllers
         {
             return Ok(new PersonViewModel());
         }
+
     }
 }

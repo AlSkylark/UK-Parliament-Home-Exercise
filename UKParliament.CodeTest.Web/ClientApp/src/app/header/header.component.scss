@@ -1,0 +1,28 @@
+.container-fluid {
+  padding: 0;
+}
+.wrapper {
+  background-color: var(--parliament-color);
+  color: white;
+  font-size: 2.3rem;
+  font-family: National, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+.logo {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.title {
+  border-top: 1px solid var(--parliament-color-light);
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+.breadcrumbs {
+  background-color: var(--parliament-color-light);
+  font-size: 1rem;
+  line-height: 1.4rem;
+  padding: 5px 0px;
+}
+.breadcrumbs a {
+  color: white;
+}
