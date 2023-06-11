@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using UKParliament.CodeTest.Data;
+using UKParliament.CodeTest.Data.Models;
 using UKParliament.CodeTest.Services;
+using UKParliament.CodeTest.Services.Interfaces;
 using UKParliament.CodeTest.Web.Data;
 
 namespace UKParliament.CodeTest.Web
@@ -39,7 +41,8 @@ namespace UKParliament.CodeTest.Web
 
             app.MapFallbackToFile("index.html");
 
-            DatabaseSeeder.Seed(app);
+            using var scope = ((IApplicationBuilder)app).ApplicationServices.CreateScope();
+            DatabaseSeeder.Seed(scope.ServiceProvider.GetService<PersonManagerContext>());
 
             app.Run();
         }

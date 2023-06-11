@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UKParliament.CodeTest.Data;
+using UKParliament.CodeTest.Data.Models;
+using UKParliament.CodeTest.Services.Interfaces;
 
 namespace UKParliament.CodeTest.Services
 {
@@ -33,10 +35,24 @@ namespace UKParliament.CodeTest.Services
             return mp;
         }
 
-        public List<MP> GetAll(bool expanded)
+        public IEnumerable<MP> GetAll(int page)
         {
-            if (expanded) return _context.MPs.Include(mp => mp.Address).Include(mp => mp.Affiliation).ToList();
-            return _context.MPs.ToList();
+            //basic offset pagination
+            //?page=1 = 10, ?page=2 = 10 * 2, etc.
+            int pageLimit = 10;
+
+            return _context.MPs
+                .Include(mp => mp.Address)
+                .Include(mp => mp.Affiliation)
+                .OrderBy(v => v.Name)
+                .Skip((page - 1) * pageLimit)
+                .Take(pageLimit)
+                .ToList();
+        }
+
+        public int GetCount()
+        {
+            return _context.MPs.Count();
         }
 
         public MP? Update(MP mp)

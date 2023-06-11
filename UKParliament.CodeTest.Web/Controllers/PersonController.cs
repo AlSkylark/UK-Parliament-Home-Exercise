@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UKParliament.CodeTest.Data;
-using UKParliament.CodeTest.Services;
+using UKParliament.CodeTest.Data.Models;
+using UKParliament.CodeTest.Services.Interfaces;
 using UKParliament.CodeTest.Web.ViewModels;
 
 namespace UKParliament.CodeTest.Web.Controllers

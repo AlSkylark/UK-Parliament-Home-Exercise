@@ -1,6 +1,6 @@
-﻿using UKParliament.CodeTest.Data;
+﻿using UKParliament.CodeTest.Data.Models;
 
-namespace UKParliament.CodeTest.Services
+namespace UKParliament.CodeTest.Services.Interfaces
 {
     internal interface IAffiliationService
     {

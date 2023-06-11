@@ -1,8 +1,9 @@
-﻿namespace UKParliament.CodeTest.Services
+﻿namespace UKParliament.CodeTest.Services.Interfaces
 {
     public interface IPersonService<T>
     {
-        IEnumerable<T> GetAll(bool expanded);
+        IEnumerable<T> GetAll(int page);
+        int GetCount();
         T? Get(int id);
         T? Create(T person);
         T? Update(T person);

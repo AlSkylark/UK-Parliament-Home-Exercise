@@ -1,4 +1,17 @@
-<div *ngFor="let mp of mps | async">
-  <div>{{ mp.name }}</div>
+<div *ngIf="paginator">
+  Showing page {{ paginator.currentPage }} out of {{ paginator.pageCount }}.
+  <div *ngFor="let mp of paginator.data">
+    <div id="{{ mp.personId }}">
+      {{ mp.name }}
+      {{ mp.affiliationName }}
+      {{ mp.affiliationColour }}
+      {{ mp.addressCounty }}
+    </div>
+  </div>
+  <button (click)="DecreasePage()">Previous</button>
+  <div *ngFor="let number of pages">
+    <button (click)="ChangePage(number)">{{ number }}</button>
+  </div>
+  <button (click)="IncreasePage()">Next</button>
 </div>
 
