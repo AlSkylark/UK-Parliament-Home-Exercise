@@ -14,7 +14,6 @@ namespace UKParliament.CodeTest.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MP>().HasBaseType<Person>();
             modelBuilder.Entity<MP>().HasOne(v => v.Address);
             modelBuilder.Entity<MP>().HasOne(v => v.Affiliation);
             modelBuilder.Entity<MP>().Property(v => v.DateCreated)

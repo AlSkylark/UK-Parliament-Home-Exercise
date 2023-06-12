@@ -20,6 +20,8 @@ namespace UKParliament.CodeTest.Web
             builder.Services.AddDbContext<PersonManagerContext>(op => op.UseInMemoryDatabase("PersonManager"));
 
             builder.Services.AddScoped<IPersonService<MP>, MPService>();
+            builder.Services.AddScoped<IAffiliationService, AffiliationService>();
+            builder.Services.AddScoped<IAddressService, AddressService>();
             //builder.Services.AddScoped<IPersonService<Person>, PersonService>();
 
             var app = builder.Build();

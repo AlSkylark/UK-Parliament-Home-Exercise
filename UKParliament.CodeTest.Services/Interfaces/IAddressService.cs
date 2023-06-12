@@ -2,9 +2,8 @@
 
 namespace UKParliament.CodeTest.Services.Interfaces
 {
-    public interface IAffiliationService
+    public interface IAddressService
     {
-        List<Affiliation> GetAll();
-        Affiliation Get(int id);
+        Address Create(Address address);
     }
 }

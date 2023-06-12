@@ -1,29 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using UKParliament.CodeTest.Data.Models;
-using UKParliament.CodeTest.Services.Interfaces;
-using UKParliament.CodeTest.Web.ViewModels;
-
-namespace UKParliament.CodeTest.Web.Controllers
+﻿namespace UKParliament.CodeTest.Web.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class PersonController : ControllerBase
-    {
-        private readonly IPersonService<Person> _service;
-        private readonly ILogger<PersonController> _logger;
+    //[ApiController]
+    //[Route("api/[controller]")]
+    //public class PersonController : ControllerBase
+    //{
+    //    private readonly IPersonService<Person> _service;
+    //    private readonly ILogger<PersonController> _logger;
 
-        public PersonController(ILogger<PersonController> logger, IPersonService<Person> service)
-        {
-            _logger = logger;
-            _service = service;
-        }
+    //    public PersonController(ILogger<PersonController> logger, IPersonService<Person> service)
+    //    {
+    //        _logger = logger;
+    //        _service = service;
+    //    }
 
-        [Route("{id:int}")]
-        [HttpGet]
-        public ActionResult<PersonViewModel> GetById(int id)
-        {
-            return Ok(new PersonViewModel());
-        }
+    //    [Route("{id:int}")]
+    //    [HttpGet]
+    //    public ActionResult<PersonViewModel> GetById(int id)
+    //    {
+    //        return Ok(new PersonViewModel());
+    //    }
 
-    }
+    //}
 }

@@ -12,6 +12,11 @@ namespace UKParliament.CodeTest.Services
             _context = context;
         }
 
+        public Affiliation Get(int id)
+        {
+            return _context.Affiliations.Where(a => a.AffiliationId == id).FirstOrDefault();
+        }
+
         public List<Affiliation> GetAll()
         {
             return _context.Affiliations.ToList();

@@ -137,9 +137,11 @@ namespace UKParliament.CodeTest.Tests
         public void Create_An_MP()
         {
             var mpToCreate = DatabaseSeeder.CreateFakeMP();
+            Assert.True(mpToCreate.PersonId == 0);
 
             var mpReturned = service.Create(mpToCreate);
             Assert.Equal(mpToCreate, mpReturned);
+
 
             var mpInDb = service.Get(mpReturned.PersonId);
             Assert.Equal(mpToCreate, mpInDb);
@@ -183,6 +185,7 @@ namespace UKParliament.CodeTest.Tests
             Assert.True(deleted);
             Assert.Null(retrieve);
         }
+
 
         [Fact]
         public void I_Should_Get_All_Affiliations()

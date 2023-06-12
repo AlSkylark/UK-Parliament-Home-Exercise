@@ -15,9 +15,9 @@ namespace UKParliament.CodeTest.Services
 
         public MP Create(MP mp)
         {
-            _context.MPs.Add(mp);
+            var created = _context.MPs.Add(mp);
             _context.SaveChanges();
-            return mp;
+            return Get(created.Entity.PersonId);
         }
 
         public bool Delete(int id)
@@ -31,7 +31,10 @@ namespace UKParliament.CodeTest.Services
 
         public MP? Get(int id)
         {
-            var mp = _context.MPs.Where(mp => mp.PersonId == id).FirstOrDefault();
+            var mp = _context.MPs.Include(mp => mp.Address)
+                        .Include(mp => mp.Affiliation)
+                        .Where(mp => mp.PersonId == id)
+                        .FirstOrDefault();
             return mp;
         }
 
@@ -57,8 +60,13 @@ namespace UKParliament.CodeTest.Services
 
         public MP? Update(MP mp)
         {
+
             _context.MPs.Update(mp);
-            return _context.SaveChanges() > 0 ? mp : null;
+            var updated = _context.MPs.Include(x => x.Address)
+                .Include(x => x.Affiliation)
+                .Where(x => x.PersonId == mp.PersonId)
+                .FirstOrDefault();
+            return _context.SaveChanges() > 0 ? updated : null;
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     public class MP : Person
     {
+
         //foreign
         public virtual Affiliation Affiliation { get; set; }
 
