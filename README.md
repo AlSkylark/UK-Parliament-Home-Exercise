@@ -6,4 +6,4 @@ I tried to show a little bit of everything I know of (though I'm sure I've misse
 
 At least it does what it asked for!
 
-*I do hope it "runs on your machine" though...
+*I do hope it "runs on your machine" though...*
