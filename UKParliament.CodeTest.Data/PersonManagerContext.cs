@@ -16,10 +16,14 @@ namespace UKParliament.CodeTest.Data
         {
             modelBuilder.Entity<MP>().HasOne(v => v.Address);
             modelBuilder.Entity<MP>().HasOne(v => v.Affiliation);
+
             modelBuilder.Entity<MP>().Property(v => v.DateCreated)
                 .HasValueGenerator<CurrentDateTimeValueGenerator>().ValueGeneratedOnAdd();
             modelBuilder.Entity<MP>().Property(v => v.DateModified)
                 .HasValueGenerator<CurrentDateTimeValueGenerator>().ValueGeneratedOnAddOrUpdate();
+
+            modelBuilder.Entity<MP>().Navigation(e => e.Address).AutoInclude();
+            modelBuilder.Entity<MP>().Navigation(e => e.Affiliation).AutoInclude();
 
             base.OnModelCreating(modelBuilder);
         }

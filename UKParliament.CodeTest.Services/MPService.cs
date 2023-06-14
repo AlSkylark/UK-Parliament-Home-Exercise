@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using UKParliament.CodeTest.Data;
+﻿using UKParliament.CodeTest.Data;
 using UKParliament.CodeTest.Data.Models;
 using UKParliament.CodeTest.Services.Interfaces;
 
@@ -31,8 +30,7 @@ namespace UKParliament.CodeTest.Services
 
         public MP? Get(int id)
         {
-            var mp = _context.MPs.Include(mp => mp.Address)
-                        .Include(mp => mp.Affiliation)
+            var mp = _context.MPs
                         .Where(mp => mp.PersonId == id)
                         .FirstOrDefault();
             return mp;
@@ -45,8 +43,6 @@ namespace UKParliament.CodeTest.Services
             int pageLimit = 10;
 
             return _context.MPs
-                .Include(mp => mp.Address)
-                .Include(mp => mp.Affiliation)
                 .OrderBy(v => v.Name)
                 .Skip((page - 1) * pageLimit)
                 .Take(pageLimit)
@@ -62,8 +58,7 @@ namespace UKParliament.CodeTest.Services
         {
 
             _context.MPs.Update(mp);
-            var updated = _context.MPs.Include(x => x.Address)
-                .Include(x => x.Affiliation)
+            var updated = _context.MPs
                 .Where(x => x.PersonId == mp.PersonId)
                 .FirstOrDefault();
             return _context.SaveChanges() > 0 ? updated : null;

@@ -1,0 +1,10 @@
+<div class="container">
+  <app-pagination-controls [parent]="this"></app-pagination-controls>
+  <div class="list">
+    <div *ngFor="let mp of paginator.data">
+      <app-mp-item [mp]="mp"></app-mp-item>
+    </div>
+  </div>
+  <app-pagination-controls [parent]="this"></app-pagination-controls>
+</div>
+

@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--parliament-bg);
+  margin: 15px 0px;
+  padding: 10px;
+  .info {
+    color: rgb(77, 77, 77);
+  }
+  .navigation {
+    display: flex;
+    color: var(--parliament-color);
+    border: 1px solid gray;
+    .pages {
+      display: flex;
+    }
+    button {
+      border: none;
+      border-left: 1px solid gray;
+      min-width: 30px;
+      min-height: 30px;
+    }
+    > *:first-child {
+      border: none;
+      > * {
+        border: none;
+      }
+    }
+  }
+}

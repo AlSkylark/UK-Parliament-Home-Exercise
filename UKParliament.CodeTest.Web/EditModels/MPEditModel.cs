@@ -9,10 +9,10 @@ namespace UKParliament.CodeTest.Web.EditModels
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Date of Birth is Required!")]
-        public DateTime DOB { get; set; }
+        public DateTime? DOB { get; set; }
 
         [Required(ErrorMessage = "Affiliation is Required!")]
-        public int AffiliationId { get; set; }
+        public int? AffiliationId { get; set; }
 
         public int AddressId { get; set; }
 

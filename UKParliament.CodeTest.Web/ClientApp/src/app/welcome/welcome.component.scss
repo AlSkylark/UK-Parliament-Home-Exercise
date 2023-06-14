@@ -1,0 +1,63 @@
+.welcome {
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+}
+
+.welcome a {
+  text-decoration: none;
+  color: black;
+}
+.welcome h2 {
+  color: var(--parliament-color);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  align-self: center;
+  margin: 15px 0px;
+  max-width: 500px;
+  border-radius: 0px;
+  box-shadow: 0 1px 1px 0 rgba(60, 64, 67, 0.08), 0 1px 3px 1px rgba(60, 64, 67, 0.16);
+}
+
+.card:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.card .image {
+  width: 100%;
+  padding: 15px;
+}
+.card img {
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.card .title {
+  margin-top: 10px;
+  padding: 0px 15px;
+  color: var(--parliament-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.card .subtitle {
+  color: var(--parliament-color-light);
+  padding: 0px 15px;
+}
+
+.card .line {
+  margin-top: 15px;
+  border-top: 1px solid rgb(228, 228, 228);
+}
+
+.card .date {
+  padding: 10px 15px;
+  color: gray;
+}

@@ -3,7 +3,7 @@ using UKParliament.CodeTest.Data.Models;
 
 namespace UKParliament.CodeTest.Web.ViewModels
 {
-    public static class MPViewModelMapper
+    public static class MPViewModelMappers
     {
         public static MPViewModel MapToViewModel(this MP mp)
         {

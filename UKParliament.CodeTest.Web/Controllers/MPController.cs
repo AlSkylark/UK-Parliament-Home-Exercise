@@ -23,17 +23,19 @@ namespace UKParliament.CodeTest.Web.Controllers
         public ActionResult<MPPaginator> GetAll(int page)
         {
             var rawData = _service.GetAll(page);
+            if (rawData == null) return NotFound();
+
             var count = _service.GetCount();
             //hardcoded limit
-            decimal round = Math.Ceiling(count / 10.0M);
-            count = (int)round;
+            int round = (int)Math.Ceiling(count / 10.0M);
 
             var list = rawData.Select(mp => mp.MapToViewModel()).ToList();
 
             return Ok(new MPPaginator(list)
             {
+                TotalItems = count,
                 CurrentPage = page,
-                PageCount = count
+                PageCount = round
             });
         }
 
@@ -41,34 +43,11 @@ namespace UKParliament.CodeTest.Web.Controllers
         public ActionResult<MPViewModel> Post([FromBody] MPEditModel mp,
             [FromServices] IAddressService addressService, [FromServices] IAffiliationService affiliationService)
         {
-
-            //make the address + affi
-            var address = new Address
-            {
-                Address1 = mp.Address1,
-                Address2 = mp.Address2,
-                Town = mp.Town,
-                County = mp.County,
-                Postcode = mp.Postcode
-            };
-            address = addressService.Create(address);
-            var affi = affiliationService.Get(mp.AffiliationId);
-
-            var toSend = new MP
-            {
-                Name = mp.Name,
-                DOB = mp.DOB,
-                Address = address,
-                Affiliation = affi
-            };
-
-            if (!ModelState.IsValid)
-            {
-                //something
-                return Problem();
-            }
-
+            var toSend = mp.MapToMP(addressService, affiliationService);
             var created = _service.Create(toSend);
+
+            if (created == null) return Problem();
+            _logger.Log(LogLevel.Information, "MP Created", created);
             return Ok(created.MapToViewModel());
         }
 
@@ -77,6 +56,7 @@ namespace UKParliament.CodeTest.Web.Controllers
         public ActionResult<MPEditModel> Get(int id)
         {
             var mp = _service.Get(id);
+            if (mp == null) return NotFound();
             return Ok(mp.MapToEditModel());
         }
 
@@ -90,27 +70,12 @@ namespace UKParliament.CodeTest.Web.Controllers
             //changed, rather than the entire record!
             //For the sake of simplicity this acts more like a PUT request
             //but ideally I'd prefer to pass in only the necessary data
-
-            if (!ModelState.IsValid)
-            {
-                //something
-                return Problem();
-            }
-
             var mpToPatch = _service.Get(id);
-            var affi = affiliationService.Get(mp.AffiliationId);
+            var toSend = mpToPatch.PatchMP(mp, affiliationService);
 
-            mpToPatch.Affiliation = affi;
-            mpToPatch.Address.Address1 = mp.Address1;
-            mpToPatch.Address.Address2 = mp.Address2;
-            mpToPatch.Address.Town = mp.Town;
-            mpToPatch.Address.County = mp.County;
-            mpToPatch.Address.Postcode = mp.Postcode;
-            mpToPatch.Name = mp.Name;
-            mpToPatch.DOB = mp.DOB;
-
-            var patched = _service.Update(mpToPatch);
-
+            var patched = _service.Update(toSend);
+            if (patched == null) return Problem();
+            _logger.Log(LogLevel.Information, "MP Updated", patched);
             return Ok(patched.MapToEditModel());
         }
 
@@ -118,7 +83,11 @@ namespace UKParliament.CodeTest.Web.Controllers
         [HttpDelete]
         public ActionResult<MPEditModel> Delete(int id)
         {
-            if (_service.Delete(id)) return NoContent();
+            if (_service.Delete(id))
+            {
+                _logger.Log(LogLevel.Information, "MP Deleted", id);
+                return NoContent();
+            }
             return Problem();
         }
 

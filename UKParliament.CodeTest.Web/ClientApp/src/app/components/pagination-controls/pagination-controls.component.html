@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="info">
+    Total results <b>{{ parent.paginator.totalItems }}</b> (page <b>{{ parent.paginator.currentPage }}</b> of <b>{{ parent.paginator.pageCount }}</b
+    >)
+  </div>
+  <div class="navigation">
+    <button (click)="parent.DecreasePage()" *ngIf="parent.paginator.currentPage !== 1">Previous</button>
+
+    <div *ngFor="let number of parent.pages" class="page-item">
+      <button (click)="parent.ChangePage(number)">{{ number }}</button>
+    </div>
+
+    <button (click)="parent.IncreasePage()" *ngIf="parent.paginator.currentPage !== parent.paginator.pageCount">Next</button>
+  </div>
+</div>
+
