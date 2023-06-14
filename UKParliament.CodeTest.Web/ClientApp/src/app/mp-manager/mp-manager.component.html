@@ -1,5 +1,16 @@
 <div class="container">
-  <div *ngIf="paginator" class="paginator">
-    <app-mp-pagination [paginator]="paginator"></app-mp-pagination>
+  <div class="title">
+    <div>Select which MP you wish to manage.</div>
+    <button (click)="OpenEditorForCreation()">ADD MP</button>
+  </div>
+  <div class="selectors">
+    <button [class.selected]="listActive" (click)="ToggleComponents('list')">LIST</button>
+    <button [class.selected]="editorActive" (click)="ToggleComponents('')">EDITOR</button>
+  </div>
+  <div class="wrapper" [class.withEditor]="editorActive">
+    <div *ngIf="paginator" class="paginator" [class.withoutPaginator]="editorActive">
+      <app-mp-pagination [paginator]="paginator"></app-mp-pagination>
+    </div>
+    <app-mp-editor *ngIf="editorActive" class="editor" [mpId]="mpId" (dataUpdated)="OnDataChanged($event)"></app-mp-editor>
   </div>
 </div>

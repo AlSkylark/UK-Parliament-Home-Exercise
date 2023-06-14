@@ -4,6 +4,7 @@ namespace UKParliament.CodeTest.Web.EditModels
 {
     public class MPEditModel
     {
+        public int PersonId { get; set; }
 
         [Required(ErrorMessage = "Name is Required!")]
         public string Name { get; set; }

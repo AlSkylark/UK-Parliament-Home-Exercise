@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="content">
+    <button (click)="closeEditor()">CLOSE</button>
+    <div *ngIf="reqError" class="error">There were validation errors!</div>
+    <form #myForm="ngForm" (ngSubmit)="submit()" class="form">
+      <div class="info">
+        <app-mp-avatar [colour]="colour" class="avatar"></app-mp-avatar>
+        <div class="personal">
+          <label for="name" class="textbox" required> Full name</label>
+          <input class="form-control" type="text" id="name" name="name" [(ngModel)]="mp.name" />
+          <label for="dob" class="date"> Date of Birth</label>
+          <input class="form-control" type="date" id="dob" name="dob" [ngModel]="mp.dob | date : 'yyyy-MM-dd'" (ngModelChange)="mp.dob = $event" />
+        </div>
+      </div>
+
+      <label for="address1" class="textbox"> Address</label>
+      <div class="address">
+        <input class="form-control" type="text" id="address1" name="address1" [(ngModel)]="mp.address1" />
+        <input class="form-control" type="text" id="address2" name="address2" [(ngModel)]="mp.address2" />
+      </div>
+
+      <label for="town" class="textbox"> Town</label>
+      <input class="form-control" type="text" id="town" name="town" [(ngModel)]="mp.town" />
+
+      <label for="name" class="textbox"> County</label>
+      <input class="form-control" type="text" id="county" name="county" [(ngModel)]="mp.county" />
+
+      <label for="name" class="textbox"> Postcode</label>
+      <input class="form-control" type="text" id="postcode" name="postcode" [(ngModel)]="mp.postcode" />
+      <label for="affiliation">Party Affiliation</label>
+      <select class="form-control" name="affiliationId" id="affiliation" [(ngModel)]="mp.affiliationId" class="dropdown" (change)="LoadColour()">
+        <option *ngFor="let affiliation of affiliations" value="{{ affiliation.affiliationId }}" [selected]="affiliation.affiliationId === mp.affiliationId">{{ affiliation.name }}</option>
+      </select>
+      <button type="submit" class="submit">{{ mpId === undefined ? "CREATE" : "SAVE" }}</button>
+    </form>
+  </div>
+</div>
+

@@ -49,6 +49,26 @@ namespace UKParliament.CodeTest.Services
                 .ToList();
         }
 
+        /// <summary>
+        /// Fetches the page where the id is located (ordered by Name).
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Tuple<IEnumerable<MP>, int> GetSpecificPage(int id)
+        {
+            int pageLimit = 10;
+            int page = 1;
+            while (!_context.MPs
+                .OrderBy(v => v.Name)
+                .Skip((page - 1) * pageLimit)
+                .Take(pageLimit).ToList()
+                .Any(v => v.PersonId == id))
+            {
+                page++;
+            };
+            return Tuple.Create(GetAll(page), page);
+        }
+
         public int GetCount()
         {
             return _context.MPs.Count();

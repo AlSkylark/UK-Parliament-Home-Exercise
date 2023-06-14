@@ -47,12 +47,22 @@ namespace UKParliament.CodeTest.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<MP> GetSpecificPage(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Person Update(int id)
         {
             throw new NotImplementedException();
         }
 
         public Person? Update(Person person)
+        {
+            throw new NotImplementedException();
+        }
+
+        Tuple<IEnumerable<MP>, int> IPersonService<Person>.GetSpecificPage(int id)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,5 @@
 export interface MPEditModel {
+    personId: number;
     name: string;
     dob: Date;
     affiliationId: number;

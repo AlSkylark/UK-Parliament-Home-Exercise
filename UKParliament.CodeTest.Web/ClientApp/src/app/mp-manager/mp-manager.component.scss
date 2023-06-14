@@ -5,4 +5,60 @@
   @media (max-width: 700px) {
     padding: 10px;
   }
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    button {
+      border: 1px solid var(--parliament-color-light);
+      padding: 10px;
+      background-color: var(--parliament-color);
+      color: white;
+      &:hover {
+        background-color: var(--parliament-color-light);
+      }
+    }
+  }
+
+  .selectors {
+    display: none;
+    justify-content: space-between;
+    margin: 0px 12px;
+    margin-top: 10px;
+    button {
+      border: none;
+      padding: 10px;
+      flex-grow: 1;
+    }
+    button:nth-child(2) {
+      border-left: 1px solid var(--parliament-color-light);
+    }
+    button:hover {
+      background-color: var(--parliament-color-light);
+      color: white;
+    }
+    .selected {
+      background-color: var(--parliament-color);
+      color: white;
+    }
+    @media (max-width: 1200px) {
+      display: flex;
+    }
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    &.withEditor {
+      grid-template-columns: 1fr 0.5fr;
+      @media (max-width: 1200px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    .paginator.withoutPaginator {
+      @media (max-width: 1200px) {
+        display: none;
+      }
+    }
+  }
 }

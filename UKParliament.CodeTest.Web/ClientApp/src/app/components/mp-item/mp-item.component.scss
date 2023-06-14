@@ -8,49 +8,23 @@
   border-radius: 0px;
   box-shadow: 0 1px 1px 0 rgba(60, 64, 67, 0.08), 0 1px 3px 1px rgba(60, 64, 67, 0.16);
   flex-basis: 500px;
-}
-
-.card:hover {
-  background-color: rgb(245, 245, 245);
+  &.highlight {
+    background-color: rgb(217, 209, 235);
+    &:hover {
+      background-color: rgb(217, 209, 235);
+    }
+  }
+  &:hover {
+    background-color: rgb(245, 245, 245);
+  }
 }
 
 .decoration {
   width: 5px;
   background-color: var(--parliament-color);
 }
-
 .avatar {
   place-self: center;
-  margin: 10px;
-  display: grid;
-  overflow: hidden;
-  width: 80px;
-  height: 80px;
-
-  > *,
-  > * > * {
-    border-radius: 50%;
-  }
-  .affiliation {
-    display: grid;
-    place-self: center;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .image {
-    place-self: center;
-    height: 90%;
-    width: 90%;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
 }
 
 .info {

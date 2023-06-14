@@ -1,16 +1,10 @@
-<div class="card">
+<div class="card" [class.highlight]="currentId == mp.personId" (click)="openEditor(mp.personId)">
   <div class="decoration"></div>
-  <div class="avatar">
-    <div class="affiliation" [style.backgroundColor]="mp.affiliationColour">
-      <div class="image">
-        <img src="/assets/defaultuser.jpg" alt="Default User" />
-      </div>
-    </div>
-  </div>
+  <app-mp-avatar [colour]="mp.affiliationColour" class="avatar"></app-mp-avatar>
   <div class="info">
     <div class="primary">
       <div class="name">{{ mp.name }}</div>
-      <div class="arrow">></div>
+      <div class="arrow">›</div>
     </div>
     <div class="affiliation">{{ mp.affiliationName }}</div>
     <div class="line"></div>

@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { EditorStateService } from 'src/app/services/editor-state.service';
 import { MPViewModel } from 'src/models/mp-view-model';
 
 @Component({
@@ -9,9 +11,27 @@ import { MPViewModel } from 'src/models/mp-view-model';
 export class MpItemComponent implements OnInit {
 
   @Input() mp!: MPViewModel;
-  constructor() { }
+  private editorStateSubscription: Subscription;
+  private editor: EditorStateService;
+  currentId?: number;
+
+  constructor(_editor: EditorStateService) {
+    this.editor = _editor;
+    this.editorStateSubscription = _editor.editorState$.subscribe(v => {
+      this.currentId = v.id;
+    });
+  }
 
   ngOnInit(): void {
+    this.currentId = this.editor.currentId;
+  }
+
+  ngOnDestroy(): void {
+    this.editorStateSubscription.unsubscribe();
+  }
+
+  openEditor(id: number) {
+    this.editor.openEditor(id);
   }
 
 }

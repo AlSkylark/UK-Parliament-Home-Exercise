@@ -20,9 +20,21 @@ namespace UKParliament.CodeTest.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult<MPPaginator> GetAll(int page)
+        public ActionResult<MPPaginator> GetAll(int page, int id)
         {
-            var rawData = _service.GetAll(page);
+            //we fetch either a specific page where the ID is or 
+            //the specific page requested
+            IEnumerable<MP> rawData;
+            if (id > 0)
+            {
+                var data = _service.GetSpecificPage(id);
+                rawData = data.Item1;
+                page = data.Item2;
+            }
+            else
+            {
+                rawData = _service.GetAll(page);
+            }
             if (rawData == null) return NotFound();
 
             var count = _service.GetCount();

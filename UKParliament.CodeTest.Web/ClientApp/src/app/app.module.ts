@@ -10,6 +10,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { MpItemComponent } from './components/mp-item/mp-item.component';
 import { MpPaginationComponent } from './components/mp-pagination/mp-pagination.component';
 import { PaginationControlsComponent } from './components/pagination-controls/pagination-controls.component';
+import { MpEditorComponent } from './components/mp-editor/mp-editor.component';
+import { MpAvatarComponent } from './components/mp-avatar/mp-avatar.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { PaginationControlsComponent } from './components/pagination-controls/pa
     MpItemComponent,
     MpPaginationComponent,
     PaginationControlsComponent,
+    MpEditorComponent,
+    MpAvatarComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

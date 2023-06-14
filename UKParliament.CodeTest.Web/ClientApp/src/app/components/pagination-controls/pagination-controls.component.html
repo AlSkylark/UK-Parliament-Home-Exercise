@@ -4,13 +4,15 @@
     >)
   </div>
   <div class="navigation">
-    <button (click)="parent.DecreasePage()" *ngIf="parent.paginator.currentPage !== 1">Previous</button>
+    <button (click)="parent.ChangePage(1)" *ngIf="parent.paginator.currentPage !== 1 && parent.paginator.currentPage !== 2" class="first">«</button>
+    <button (click)="parent.DecreasePage()" *ngIf="parent.paginator.currentPage !== 1" class="prev">‹</button>
 
     <div *ngFor="let number of parent.pages" class="page-item">
-      <button (click)="parent.ChangePage(number)">{{ number }}</button>
+      <button (click)="parent.ChangePage(number)" [class.active]="parent.paginator.currentPage === number">{{ number }}</button>
     </div>
 
-    <button (click)="parent.IncreasePage()" *ngIf="parent.paginator.currentPage !== parent.paginator.pageCount">Next</button>
+    <button (click)="parent.IncreasePage()" *ngIf="parent.paginator.currentPage !== parent.paginator.pageCount" class="next">›</button>
+    <button (click)="parent.ChangePage(parent.paginator.pageCount)" *ngIf="parent.paginator.currentPage !== parent.paginator.pageCount && parent.paginator.currentPage !== parent.paginator.pageCount - 1" class="last">»</button>
   </div>
 </div>
 

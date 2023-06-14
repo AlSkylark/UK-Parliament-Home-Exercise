@@ -10,6 +10,7 @@ import { MPPaginatorModel } from 'src/models/mp-paginator-model';
 export class MpPaginationComponent implements OnInit {
 
   @Input() paginator!: MPPaginatorModel;
+
   pages: number[] = [];
   currentPage = 1;
 

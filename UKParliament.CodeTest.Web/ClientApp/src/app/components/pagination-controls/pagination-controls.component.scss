@@ -1,6 +1,8 @@
 .container {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
   align-items: center;
   background-color: var(--parliament-bg);
   margin: 15px 0px;
@@ -10,6 +12,7 @@
   }
   .navigation {
     display: flex;
+    align-self: end;
     color: var(--parliament-color);
     border: 1px solid gray;
     .pages {
@@ -17,11 +20,31 @@
     }
     button {
       border: none;
-      border-left: 1px solid gray;
+      border-right: 1px solid gray;
       min-width: 30px;
       min-height: 30px;
+      background-color: white;
+      &:hover {
+        background-color: var(--parliament-color-light);
+        color: white;
+      }
+      &.active {
+        background-color: var(--parliament-color);
+        color: white;
+      }
     }
-    > *:first-child {
+    @media (max-width: 500px) {
+      > * {
+        display: none;
+      }
+      .first,
+      .next,
+      .last,
+      .prev {
+        display: block;
+      }
+    }
+    > *:last-child {
       border: none;
       > * {
         border: none;

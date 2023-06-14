@@ -14,6 +14,7 @@ namespace UKParliament.CodeTest.Web.EditModels
         {
             return new MPEditModel
             {
+                PersonId = mp.PersonId,
                 Name = mp.Name,
                 DOB = mp.DOB,
                 AffiliationId = mp.Affiliation.AffiliationId,
