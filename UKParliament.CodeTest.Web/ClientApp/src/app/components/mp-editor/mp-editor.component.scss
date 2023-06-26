@@ -22,6 +22,14 @@
     @media (max-width: 1200px) {
       position: relative;
     }
+    .error {
+      display: grid;
+      place-content: center;
+    }
+    .errors {
+      display: flex;
+      justify-content: space-between;
+    }
     button {
       border: 1px solid var(--parliament-color-light);
       background-color: var(--parliament-color);

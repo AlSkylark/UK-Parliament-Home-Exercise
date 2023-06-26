@@ -174,6 +174,24 @@ namespace UKParliament.CodeTest.Tests
         }
 
         [Fact]
+        public void Update_Should_Update_DateModified()
+        {
+            var mp = service.Get(1);
+            var ogName = mp.Name;
+            var ogDate = mp.DateModified;
+
+            mp.Name = "Modified Name";
+
+            Thread.Sleep(1000);
+
+            var modMp = service.Update(mp);
+
+            Assert.NotNull(modMp);
+            Assert.NotEqual(ogName, modMp.Name);
+            Assert.NotEqual(ogDate, modMp.DateModified);
+        }
+
+        [Fact]
         public void Delete_Should_Delete_MP()
         {
             var mpToCreate = DatabaseSeeder.CreateFakeMP();

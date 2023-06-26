@@ -34,6 +34,7 @@ export class MpEditorComponent implements OnInit {
   public mp: MPEditModel = this.emptyMp;
   public colour = "#f0f0f0";
   public reqError = false;
+  public Errors: any;
 
   constructor(private _editor: EditorStateService, private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     this.editor = _editor;
@@ -83,6 +84,15 @@ export class MpEditorComponent implements OnInit {
   handleError(err: HttpErrorResponse) {
     //I'm running out of time here, so I'm just going to display a simple error message!
     this.reqError = true;
+    this.Errors = [];
+    for (const key in err.error.errors) {
+      this.Errors.push({ name: key, errors: err.error.errors[key] });
+      // if (Object.hasOwnProperty(key)) {
+      //   this.Errors.push(key);
+      // }
+    }
+    console.log(this.Errors);
+
     return throwError(() => new Error(":("));
   }
 

@@ -1,7 +1,16 @@
 <div class="container">
   <div class="content">
     <button (click)="closeEditor()">CLOSE</button>
-    <div *ngIf="reqError" class="error">There were validation errors!</div>
+    <div *ngIf="reqError" class="error">
+      <div *ngFor="let error of Errors" class="errors">
+        <div>The field {{ error.name }} has the following requirements:</div>
+        <ul>
+          <li *ngFor="let requirement of error.errors">
+            {{ requirement }}
+          </li>
+        </ul>
+      </div>
+    </div>
     <form #myForm="ngForm" (ngSubmit)="submit()" class="form">
       <div class="info">
         <app-mp-avatar [colour]="colour" class="avatar"></app-mp-avatar>

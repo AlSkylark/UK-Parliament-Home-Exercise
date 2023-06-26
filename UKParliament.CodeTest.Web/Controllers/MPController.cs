@@ -55,10 +55,12 @@ namespace UKParliament.CodeTest.Web.Controllers
         public ActionResult<MPViewModel> Post([FromBody] MPEditModel mp,
             [FromServices] IAddressService addressService, [FromServices] IAffiliationService affiliationService)
         {
+            if (!ModelState.IsValid) return Problem();
+
             var toSend = mp.MapToMP(addressService, affiliationService);
             var created = _service.Create(toSend);
 
-            if (created == null) return Problem();
+            //if (created == null) return Problem(); 
             _logger.Log(LogLevel.Information, "MP Created", created);
             return Ok(created.MapToViewModel());
         }

@@ -20,12 +20,28 @@ namespace UKParliament.CodeTest.Data
             modelBuilder.Entity<MP>().Property(v => v.DateCreated)
                 .HasValueGenerator<CurrentDateTimeValueGenerator>().ValueGeneratedOnAdd();
             modelBuilder.Entity<MP>().Property(v => v.DateModified)
-                .HasValueGenerator<CurrentDateTimeValueGenerator>().ValueGeneratedOnAddOrUpdate();
+                .HasValueGenerator<CurrentDateTimeValueGenerator>().ValueGeneratedOnAdd();
 
             modelBuilder.Entity<MP>().Navigation(e => e.Address).AutoInclude();
             modelBuilder.Entity<MP>().Navigation(e => e.Affiliation).AutoInclude();
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public override int SaveChanges()
+        {
+            var modified = ChangeTracker.Entries().Where(t => t.State == EntityState.Modified)
+                .Select(t => t.Entity).ToArray();
+
+            foreach (var item in modified)
+            {
+                if (item is MP mp)
+                {
+                    mp.DateModified = DateTime.Now;
+                }
+            }
+
+            return base.SaveChanges();
         }
 
         public DbSet<MP> MPs { get; set; }
@@ -41,7 +57,12 @@ namespace UKParliament.CodeTest.Data
     {
         public override DateTime Next(EntityEntry entry)
         {
-            return DateTime.Now;
+            return DateTime.UtcNow;
+        }
+
+        protected override object NextValue(EntityEntry entry)
+        {
+            return DateTime.UtcNow;
         }
 
         public override bool GeneratesTemporaryValues => false;
